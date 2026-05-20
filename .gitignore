@@ -1,0 +1,28 @@
+...existing code...
+# Maven build output
+/target/
+/target/**
+
+# Compiled Java classes & jars
+*.class
+*.jar
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Eclipse/IntelliJ project files
+/.classpath
+/.project
+/.settings/
+
+# Maven wrapper binary (if present)
+.mvn/wrapper/maven-wrapper.jarcon
