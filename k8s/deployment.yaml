@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: social-service
+  namespace: revhive
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: social-service
+
+  template:
+    metadata:
+      labels:
+        app: social-service
+
+    spec:
+      containers:
+        - name: social-service
+          image: tanushreenik/social-service:latest
+
+          ports:
+            - containerPort: 8084
+
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-db:3306/revhive_db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: 23@Tanushree
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://service-registry:8761/eureka
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8084
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8084
+            initialDelaySeconds: 15
+            periodSeconds: 5
