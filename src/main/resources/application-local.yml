@@ -4,26 +4,23 @@ server:
 spring:
   application:
     name: social-service
-  profiles:
-    active: local
-
 
   datasource:
-    url: jdbc:mysql://localhost:3306/revhive_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/revhive_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
-    password: root
+    password: 23@Tanushree
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka/

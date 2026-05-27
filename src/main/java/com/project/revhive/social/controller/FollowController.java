@@ -16,7 +16,6 @@ import java.util.Map;
 @RequestMapping("/api/v1/follows")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class FollowController {
 
     private final FollowService followService;
