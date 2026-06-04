@@ -1,0 +1,31 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: social-service
+
+  datasource:
+    url: jdbc:mysql://mysql:3306/revhive_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: sourav
+    password: sourav@123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+app:
+  services:
+    user-service: http://user-service:8082
+    notification-service: http://notification-service:8088
+

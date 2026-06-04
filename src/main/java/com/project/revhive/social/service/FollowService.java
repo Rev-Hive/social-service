@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.project.revhive.social.service.integration.NotificationIntegrationService;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class FollowService {
 
     private final FollowRepository followRepository;
+    private final NotificationIntegrationService notificationIntegrationService;
 
     // Follow a user
     @Transactional
@@ -42,6 +45,14 @@ public class FollowService {
         Follow savedFollow = followRepository.save(follow);
 
         log.info("User {} started following user {}", followerId, followingId);
+
+        // Trigger real-time notification
+        try {
+            notificationIntegrationService.sendFollowNotification(followerId, followingId);
+        } catch (Exception e) {
+            log.error("Failed to trigger follow notification: {}", e.getMessage());
+        }
+
         return savedFollow;
     }
 
