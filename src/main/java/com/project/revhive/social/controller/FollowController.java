@@ -1,5 +1,6 @@
 package com.project.revhive.social.controller;
 
+import com.project.revhive.social.dto.UserSummary;
 import com.project.revhive.social.model.Follow;
 import com.project.revhive.social.service.FollowService;
 import lombok.RequiredArgsConstructor;
@@ -107,10 +108,11 @@ public class FollowController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        List<Long> following = followService.getFollowing(userId, page, size);
+        List<UserSummary> following =
+                followService.getFollowing(userId, page, size);
         long totalCount = followService.getFollowingCount(userId);
-
         Map<String, Object> response = new HashMap<>();
+        response = new HashMap<>();
         response.put("success", true);
         response.put("data", following);
         response.put("totalCount", totalCount);

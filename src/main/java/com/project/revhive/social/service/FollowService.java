@@ -1,5 +1,7 @@
 package com.project.revhive.social.service;
 
+import com.project.revhive.social.client.UserClient;
+import com.project.revhive.social.dto.UserSummary;
 import com.project.revhive.social.model.Follow;
 import com.project.revhive.social.repository.FollowRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import com.project.revhive.social.service.integration.NotificationIntegrationSer
 @Transactional
 public class FollowService {
 
+    private  final UserClient userClient;
     private final FollowRepository followRepository;
     private final NotificationIntegrationService notificationIntegrationService;
 
@@ -85,12 +88,13 @@ public class FollowService {
 
     // Get all users (IDs) that a user is following
     @Transactional(readOnly = true)
-    public List<Long> getFollowing(Long userId, int page, int size) {
+    public List<UserSummary> getFollowing(Long userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return followRepository.findByFollowerId(userId, pageable)
                 .stream()
                 .map(Follow::getFollowingId)
-                .collect(Collectors.toList());
+                .map(userClient::getUser)
+                .toList();
     }
 
     // Get followers count
