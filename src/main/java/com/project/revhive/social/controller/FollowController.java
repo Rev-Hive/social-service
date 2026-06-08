@@ -88,7 +88,7 @@ public class FollowController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        List<Long> followers = followService.getFollowers(userId, page, size);
+        List<UserSummary> followers = followService.getFollowers(userId, page, size);
         long totalCount = followService.getFollowersCount(userId);
 
         Map<String, Object> response = new HashMap<>();

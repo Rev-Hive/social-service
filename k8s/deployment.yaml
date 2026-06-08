@@ -32,9 +32,9 @@ spec:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql:3306/revhive_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
             - name: SPRING_DATASOURCE_USERNAME
-              value: sourav
+              value: root
             - name: SPRING_DATASOURCE_PASSWORD
-              value: sourav@123
+              value: 23@Tanushree
             - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
               value: http://service-registry:8761/eureka
 

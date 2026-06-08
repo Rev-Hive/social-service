@@ -76,14 +76,15 @@ public class FollowService {
         return followRepository.isFollowing(followerId, followingId);
     }
 
-    // Get all followers (IDs) of a user
+    // Get all followers of a user
     @Transactional(readOnly = true)
-    public List<Long> getFollowers(Long userId, int page, int size) {
+    public List<UserSummary> getFollowers(Long userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return followRepository.findByFollowingId(userId, pageable)
                 .stream()
                 .map(Follow::getFollowerId)
-                .collect(Collectors.toList());
+                .map(userClient::getUser)
+                .toList();
     }
 
     // Get all users (IDs) that a user is following

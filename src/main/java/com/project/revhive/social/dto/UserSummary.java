@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserSummary {
     private Long id;
     private String username;
-    private String profilePicture;
+    private String bio;
+    private String avatarUrl;
 }
